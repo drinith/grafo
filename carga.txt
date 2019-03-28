@@ -1,0 +1,15 @@
+Vertices
+A
+B
+C
+D
+E
+F
+Ligacoes
+A C
+A B
+C D
+B D
+D E
+D F
+E F
