@@ -32,6 +32,16 @@ class Grafo:
         aresta =[]
         
         for linha in texto :
+
+            if(linha=='Vertices\n'):
+                leVertice=True
+                leLigacao = False
+                continue
+            if(linha=='Ligacoes\n'):
+                leVertice=False
+                leLigacao = True
+                continue
+            
             if leVertice:
                 self.verticeLista.append(Vertice(linha.replace('\n','')))#Preencgendo a lista de vertices
             if leLigacao:
@@ -65,7 +75,6 @@ class Grafo:
                     v.visitado='preto'
                     print('Visitei '+v.nome+' ficou preto') 
 
-
                 for w in v.listaAdj:
                     if w.v2.visitado!='preto':
                         print('Olhei '+w.nome+' ficou cinza') 
@@ -87,6 +96,7 @@ class Grafo:
         vertice.visitado='preto'
         print('Acaba %s'%(vertice.nome))
         
+    #Dijkstra
     def caminhoDijkstra(self,vertice:Vertice):
         vertice.visitado="preto"
         for aresta in vertice.listaAdj:
