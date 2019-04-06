@@ -43,21 +43,34 @@ class Graph:
 
 def pre_order(n:Node):
     global time
-	print(n.name)
-	n.visited = True
-	for a in n.adj:
-		if not a.endNode.visited:
-			pre_order(a.endNode)
-            time += a.endNode.weight
+    print(n.name)
+    n.visited = True
+    for a in n.adj:
+        if not a.endNode.visited:
+            pre_order(a.endNode)
+            time += a.weight
 
 def post_order(n:Node):
     global time
-	n.visited = True
-	for a in n.adj:
-		if not a.endNode.visited:
-			post_order(a.endNode)
-            time += a.endNode.weight
-	print(n.name)
+    n.visited = True
+    for a in n.adj:
+        if not a.endNode.visited:
+            post_order(a.endNode)
+            time += a.weight
+    print(n.name)
+
+def breadth_first_search(q:list):
+    global time
+    while(q):
+        node = q.pop(0)
+        if not node.visited:
+            print(node.name)
+            node.visited = True
+            for a in node.adj:
+                if not a.endNode.checked:
+                    q.append(a.endNode)
+                    time             += a.weight
+                    a.endNode.checked = True
 
 time = 0
 
@@ -65,4 +78,9 @@ graph = Graph()
 graph.load_graph("/home/vinicius/Documentos/CEFET/Grafos/grafo/carga.txt")
 
 #pre_order(graph.nodeList[0])
-post_order(graph.nodeList[0])
+#post_order(graph.nodeList[0])
+
+q = [graph.nodeList[0]]
+breadth_first_search(q)
+
+print(time)
